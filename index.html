@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Cumpleaños</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #d1f0b6; /* Fondo verde pastel */
+            margin: 0;
+        }
+
+        .card {
+            width: 300px;
+            height: 400px;
+            border: 5px solid #39ff14; /* Bordes verde neón */
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card .message {
+            display: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: white;
+            height: 100%;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .message span {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: var(--delay);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: black;
+            color: #d1f0b6; /* Texto verde pastel */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" onclick="revealMessage()">
+        <img src="https://via.placeholder.com/300x400" alt="Imagen de cumpleaños">
+        <div class="message" id="message"></div>
+    </div>
+    
+    <button onclick="playMusic()">Reproducir Música</button>
+    
+    <audio id="birthdayMusic" src="music.ogg" preload="auto"></audio>
+
+    <script>
+        const messageContent = "Que en este día tan especial recibas todo el cariño y los buenos deseos que mereces. Que tu vida se llene de momentos mágicos, de risas sinceras y abrazos cálidos. Que cada sueño que tienes se convierta en realidad y que encuentres felicidad en cada rincón. Eres una persona increíble y espero que tu cumpleaños esté rodeado de todo el amor del mundo. ¡Feliz cumpleaños lleno de amor y alegría! 🎂💖";
+
+        function revealMessage() {
+            const card = document.querySelector('.card');
+            const message = document.getElementById('message');
+            
+            card.style.backgroundColor = 'white';
+            message.style.display = 'block';
+            
+            // Limpiar el contenido anterior
+            message.innerHTML = '';
+
+            // Crear y añadir los caracteres con animación
+            messageContent.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.setProperty('--delay', `${index * 0.05}s`);
+                message.appendChild(span);
+            });
+        }
+
+        function playMusic() {
+            const music = document.getElementById('birthdayMusic');
+            music.play();
+        }
+    </script>
+
+</body>
+</html>
